@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nippon Today — Portal Berita Jepang</title>
+  <meta name="description" content="Portal berita tentang Jepang: politik, ekonomi, teknologi, budaya, olahraga, dan perjalanan. Cepat, ringkas, dan responsif." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23e60026'/%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --bg:#0b0c0f; --card:#12141a; --muted:#98a2b3; --text:#e6eaf2; --brand:#e60026; --brand-2:#c7001f; --border:#232634;
+      --light-bg:#f6f7fb; --light-card:#ffffff; --light-text:#0b0c0f; --light-muted:#475467; --light-border:#e4e7ec;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,'Helvetica Neue',Arial,sans-serif;line-height:1.6;background:var(--light-bg);color:var(--light-text)}
+    .dark body{background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;border-radius:12px;display:block}
+    header{position:sticky;top:0;z-index:50;background:var(--light-card);border-bottom:1px solid var(--light-border)}
+    .dark header{background:var(--card);border-color:var(--border)}
+    .container{max-width:1200px;margin:0 auto;padding:16px}
+    .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand .dot{width:14px;height:14px;background:var(--brand);border-radius:50%}
+    nav{display:flex;gap:14px;flex-wrap:wrap}
+    nav a{padding:8px 12px;border-radius:999px;border:1px solid var(--light-border);font-size:14px}
+    .dark nav a{border-color:var(--border)}
+    nav a.active, nav a:hover{background:var(--brand);color:#fff;border-color:transparent}
+    .controls{display:flex;align-items:center;gap:10px}
+    .search{position:relative}
+    .search input{padding:10px 12px 10px 36px;border-radius:10px;border:1px solid var(--light-border);background:var(--light-card);color:inherit;min-width:240px}
+    .dark .search input{border-color:var(--border);background:var(--card)}
+    .search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.6}
+    .btn{padding:8px 12px;border-radius:10px;border:1px solid var(--light-border);background:transparent;cursor:pointer}
+    .dark .btn{border-color:var(--border)}
+
+    /* Breaking */
+    .breaking{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff}
+    .breaking .inner{display:flex;gap:14px;align-items:center}
+    .ticker{overflow:hidden;white-space:nowrap}
+    .ticker span{display:inline-block;padding-left:100%;animation:ticker 30s linear infinite}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+    /* Layout */
+    main{padding-block:16px}
+    .grid{display:grid;grid-template-columns:1.5fr .9fr;gap:24px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+
+    .card{background:var(--light-card);border:1px solid var(--light-border);border-radius:16px;padding:16px}
+    .dark .card{background:var(--card);border-color:var(--border)}
+
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    @media (max-width: 960px){.hero{grid-template-columns:1fr}}
+    .hero .lead img{height:320px;object-fit:cover}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width: 960px){.grid-3{grid-template-columns:1fr}}
+
+    .tag{display:inline-flex;align-items:center;gap:6px;background:rgba(230,0,38,.1);color:var(--brand);border:1px solid rgba(230,0,38,.2);padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600}
+    .meta{display:flex;gap:12px;align-items:center;color:var(--light-muted)}
+    .dark .meta{color:var(--muted)}
+    .article{display:grid;grid-template-columns:140px 1fr;gap:12px}
+    @media (max-width: 560px){.article{grid-template-columns:1fr}}
+
+    /* Sidebar */
+    .list{display:flex;flex-direction:column;gap:12px}
+    .list .item{display:grid;grid-template-columns:88px 1fr;gap:12px}
+    .list .item img{height:64px;object-fit:cover}
+
+    footer{margin-top:24px;padding:24px 0;border-top:1px solid var(--light-border);background:var(--light-card)}
+    .dark footer{border-color:var(--border);background:var(--card)}
+    .footergrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+    @media (max-width: 960px){.footergrid{grid-template-columns:1fr}}
+
+    .tiny{font-size:12px;color:var(--light-muted)}
+    .dark .tiny{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header role="banner" aria-label="Header">
+    <div class="container topbar">
+      <div class="brand" aria-label="Brand">
+        <span class="dot" aria-hidden="true"></span>
+        <a href="#"><span>Nippon</span> <span style="color:var(--brand)">Today</span></a>
+      </div>
+      <nav aria-label="Navigasi utama">
+        <a href="#politik" class="active">Politik</a>
+        <a href="#ekonomi">Ekonomi</a>
+        <a href="#teknologi">Teknologi</a>
+        <a href="#budaya">Budaya</a>
+        <a href="#olahraga">Olahraga</a>
+        <a href="#travel">Travel</a>
+      </nav>
+      <div class="controls">
+        <div class="search" role="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2"/></svg>
+          <label for="q" class="tiny" style="position:absolute;left:36px;top:-6px">Cari berita</label>
+          <input id="q" type="search" placeholder="Cari: Tokyo, startup, Shinkansen…" aria-label="Cari berita" />
+        </div>
+        <button class="btn" id="modeBtn" aria-pressed="false" aria-label="Ganti mode gelap">🌗</button>
+      </div>
+    </div>
+    <div class="breaking" role="region" aria-label="Breaking news">
+      <div class="container inner">
+        <strong>Breaking</strong>
+        <div class="ticker" aria-live="polite"><span>
+          Yen menguat terhadap USD; Pemerintah mempertimbangkan langkah stabilisasi · 
+          Startup AI di Tokyo raih pendanaan Seri B · 
+          Festival Musim Gugur di Kyoto kembali digelar · 
+          Shinkansen rute Tohoku mencatat rekor penumpang · 
+          Liga sepak bola Jepang bersiap untuk final musim 2025
+        </span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="konten">
+    <!-- HERO -->
+    <section class="hero" aria-label="Sorotan">
+      <article class="card lead" data-category="politik ekonomi">
+        <img src="https://picsum.photos/1200/600?random=1" alt="Gedung parlemen Jepang di Tokyo" />
+        <div style="padding-top:10px">
+          <span class="tag">Sorotan</span>
+          <h1 style="margin:.4rem 0">Kebijakan Industri Hijau: Peta Jalan Jepang Menuju Net-Zero 2050</h1>
+          <p class="meta"><span>Tokyo</span> • <time datetime="2025-10-03">3 Okt 2025</time> • 6 menit baca</p>
+          <p>Rangkaian insentif baru diumumkan untuk kendaraan listrik, energi terbarukan, dan infrastruktur baterai. Pemerintah menargetkan ekosistem manufaktur yang kompetitif sambil menjaga stabilitas energi nasional.</p>
+          <a class="tiny" href="#">Baca selengkapnya →</a>
+        </div>
+      </article>
+      <aside class="card" aria-label="Sorotan lain">
+        <div class="grid-3">
+          <article class="article" data-category="teknologi ekonomi">
+            <img src="https://picsum.photos/300/200?random=2" alt="Robot industri di pabrik" />
+            <div>
+              <h3>Ekspansi Robotika Jepang di ASEAN</h3>
+              <p class="tiny meta"><span>Osaka</span> • <time datetime="2025-10-02">2 Okt 2025</time></p>
+              <p>Produsen mekatronik memproyeksikan lonjakan permintaan otomatisasi pabrik di Asia Tenggara.</p>
+            </div>
+          </article>
+          <article class="article" data-category="budaya travel">
+            <img src="https://picsum.photos/300/200?random=3" alt="Kuil di Kyoto saat musim gugur" />
+            <div>
+              <h3>Kyoto Musim Momiji: Panduan Singkat</h3>
+              <p class="tiny meta"><span>Kyoto</span> • <time datetime="2025-09-29">29 Sep 2025</time></p>
+              <p>Tips jalur terbaik, etika berkunjung, dan waktu keemasan memotret daun merah.</p>
+            </div>
+          </article>
+          <article class="article" data-category="olahraga">
+            <img src="https://picsum.photos/300/200?random=4" alt="Stadion sepak bola di malam hari" />
+            <div>
+              <h3>J1 League: Menjelang Partai Puncak</h3>
+              <p class="tiny meta"><span>Yokohama</span> • <time datetime="2025-10-01">1 Okt 2025</time></p>
+              <p>Persaingan gelar semakin ketat; klub unggulan mematangkan strategi laga akhir.</p>
+            </div>
+          </article>
+        </div>
+      </aside>
+    </section>
+
+    <div class="grid" style="margin-top:16px">
+      <!-- KIRI: KONTEN UTAMA -->
+      <section class="card" aria-label="Berita terbaru">
+        <h2 id="politik" style="margin-top:0">Berita Terbaru</h2>
+        <div class="grid-3" id="feed">
+          <!-- Kartu artikel -->
+          <article class="card" data-category="politik">
+            <img src="https://picsum.photos/600/400?random=5" alt="Sidang parlemen" />
+            <div>
+              <span class="tag">Politik</span>
+              <h3>RUU Transparansi Data Lintas-Batas Disahkan</h3>
+              <p class="tiny meta"><time datetime="2025-10-03">3 Okt 2025</time> • Tokyo</p>
+              <p>Regulasi baru menstandarkan tata kelola data untuk industri fintech, kesehatan digital, dan e‑commerce.</p>
+            </div>
+          </article>
+
+          <article class="card" data-category="ekonomi">
+            <img src="https://picsum.photos/600/400?random=6" alt="Distrik bisnis dengan gedung tinggi" />
+            <div>
+              <span class="tag">Ekonomi</span>
+              <h3>Indeks Manufaktur Menguat di Kuartal III</h3>
+              <p class="tiny meta"><time datetime="2025-10-02">2 Okt 2025</time> • Nagoya</p>
+              <p>Permintaan ekspor otomotif dan semikonduktor mendorong kenaikan produksi dan penyerapan tenaga kerja.</p>
+            </div>
+          </article>
+
+          <article class="card" data-category="teknologi">
+            <img src="https://picsum.photos/600/400?random=7" alt="Pusat data modern" />
+            <div>
+              <span class="tag">Teknologi</span>
+              <h3>Data Center Berbasis Pendingin Cair Diluncurkan</h3>
+              <p class="tiny meta"><time datetime="2025-10-01">1 Okt 2025</time> • Fukuoka</p>
+              <p>Efisiensi termal meningkat hingga 30% untuk beban kerja AI dan komputasi berperforma tinggi.</p>
+            </div>
+          </article>
+
+          <article class="card" data-category="budaya">
+            <img src="https://picsum.photos/600/400?random=8" alt="Festival tradisional" />
+            <div>
+              <span class="tag">Budaya</span>
+              <h3>Warisan Kuliner Washoku Diperkenalkan ke Sekolah</h3>
+              <p class="tiny meta"><time datetime="2025-09-30">30 Sep 2025</time> • Hokkaido</p>
+              <p>Program edukasi rasa menekankan gizi, tradisi, dan keberlanjutan bahan pangan lokal.</p>
+            </div>
+          </article>
+
+          <article class="card" data-category="olahraga">
+            <img src="https://picsum.photos/600/400?random=9" alt="Atlet pelari di lintasan" />
+            <div>
+              <span class="tag">Olahraga</span>
+              <h3>Atlet Muda Pecahkan Rekor Nasional 10K</h3>
+              <p class="tiny meta"><time datetime="2025-09-28">28 Sep 2025</time> • Sapporo</p>
+              <p>Pelari 19 tahun menarik perhatian jelang seleksi tim nasional untuk kejuaraan Asia.</p>
+            </div>
+          </article>
+
+          <article class="card" data-category="travel">
+            <img src="https://picsum.photos/600/400?random=10" alt="Kereta Shinkansen melaju" />
+            <div>
+              <span class="tag">Travel</span>
+              <h3>Tips Hemat Keliling Jepang dengan Rail Pass</h3>
+              <p class="tiny meta"><time datetime="2025-09-27">27 Sep 2025</time> • Nasional</p>
+              <p>Panduan rute, reservasi kursi, serta memaksimalkan koneksi lokal untuk perjalanan fleksibel.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- KANAN: SIDEBAR -->
+      <aside class="card" aria-label="Sidebar">
+        <h2 id="tren" style="margin-top:0">Sedang Tren</h2>
+        <div class="list">
+          <div class="item" data-category="teknologi">
+            <img src="https://picsum.photos/200/200?random=11" alt="Chip semikonduktor" />
+            <div>
+              <a href="#"><strong>Riset Material 2D untuk Chip Generasi Berikutnya</strong></a>
+              <p class="tiny">Laboratorium bersama universitas dan industri fokus pada efisiensi daya.</p>
+            </div>
+          </div>
+          <div class="item" data-category="ekonomi">
+            <img src="https://picsum.photos/200/200?random=12" alt="Kantor bursa" />
+            <div>
+              <a href="#"><strong>Yen & Prospek Suku Bunga</strong></a>
+              <p class="tiny">Analis memantau inflasi inti dan sikap bank sentral.</p>
+            </div>
+          </div>
+          <div class="item" data-category="budaya">
+            <img src="https://picsum.photos/200/200?random=13" alt="Panggung teater Noh" />
+            <div>
+              <a href="#"><strong>Teater Noh di Era Digital</strong></a>
+              <p class="tiny">Kolaborasi seniman muda dengan teknologi proyeksi imersif.</p>
+            </div>
+          </div>
+        </div>
+        <hr style="margin:16px 0;border-color:var(--light-border)"/>
+        <div class="card" style="padding:12px" aria-label="Info cepat">
+          <h3 style="margin-top:4px">Info Cepat</h3>
+          <ul class="tiny">
+            <li>Cuaca Tokyo (perkiraan): Cerah berawan, 21–27°C</li>
+            <li>Kurs indikatif: 1 JPY ≈ Rp108 (contoh)</li>
+            <li>Etika kereta: antre rapi, diamkan ponsel dalam mode senyap</li>
+          </ul>
+        </div>
+        <div class="card" style="margin-top:12px;padding:12px" aria-label="Langganan">
+          <h3 style="margin-top:4px">Langganan Buletin</h3>
+          <p class="tiny">Dapatkan rangkuman mingguan berita Jepang langsung ke email Anda.</p>
+          <form onsubmit="event.preventDefault();alert('Terima kasih! Anda sudah terdaftar.');">
+            <label class="tiny" for="email">Email</label>
+            <input id="email" type="email" required placeholder="nama@contoh.com" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--light-border);background:transparent;color:inherit" />
+            <button class="btn" style="width:100%;margin-top:8px;background:var(--brand);color:#fff;border-color:transparent">Daftar</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container footergrid">
+      <div>
+        <div class="brand" aria-label="Brand footer">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Nippon <span style="color:var(--brand)">Today</span></span>
+        </div>
+        <p class="tiny">© 2025 Nippon Today. Dibangun untuk demonstrasi portal berita tentang Jepang dengan HTML murni, responsif, dan ringan.</p>
+      </div>
+      <div>
+        <h4>Kategori</h4>
+        <ul class="tiny" style="list-style:none;padding:0;line-height:2">
+          <li><a href="#politik">Politik</a></li>
+          <li><a href="#ekonomi">Ekonomi</a></li>
+          <li><a href="#teknologi">Teknologi</a></li>
+          <li><a href="#budaya">Budaya</a></li>
+          <li><a href="#olahraga">Olahraga</a></li>
+          <li><a href="#travel">Travel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tentang</h4>
+        <p class="tiny">Portal independen yang menyajikan ringkasan cepat, analisis jernih, dan panduan praktis seputar Jepang. Konten contoh untuk keperluan template.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Skema terstruktur: Organisasi & contoh artikel -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    "name": "Nippon Today",
+    "url": "https://contoh.local/nippon-today",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0MCcgZmlsbD0nI2U2MDAyNicvPjwvc3ZnPg=="
+    },
+    "sameAs": [
+      "https://x.com/",
+      "https://www.facebook.com/"
+    ]
+  }
+  </script>
+  <script>
+    // Mode gelap
+    const btn = document.getElementById('modeBtn');
+    const root = document.documentElement;
+    const applyTheme = (isDark)=>{
+      if(isDark){root.classList.add('dark');btn.setAttribute('aria-pressed','true')} else {root.classList.remove('dark');btn.setAttribute('aria-pressed','false')}
+    }
+    applyTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    btn.addEventListener('click',()=>{
+      const isDark = !document.documentElement.classList.contains('dark');
+      applyTheme(isDark);
+      try{localStorage.setItem('nippon-theme', isDark?'dark':'light')}catch(e){}
+    });
+    try{const saved=localStorage.getItem('nippon-theme');if(saved)applyTheme(saved==='dark')}catch(e){}
+
+    // Pencarian sederhana (client-side filter)
+    const q = document.getElementById('q');
+    const items = Array.from(document.querySelectorAll('[data-category]'));
+    q.addEventListener('input', ()=>{
+      const term = q.value.toLowerCase().trim();
+      items.forEach(el=>{
+        const text = el.innerText.toLowerCase();
+        el.style.display = term && !text.includes(term) ? 'none' : '';
+      });
+    });
+  </script>
+</body>
+</html>
